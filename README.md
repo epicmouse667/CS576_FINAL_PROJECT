@@ -1,2 +1,2 @@
 # Umass cs576 final project
-A toy game about gemetric knowledge
+An interactive geometry puzzle adventure where players solve multiple-choice geometry questions to collect puzzle pieces and learn geometry
