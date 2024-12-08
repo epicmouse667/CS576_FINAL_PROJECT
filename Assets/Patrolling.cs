@@ -5,6 +5,7 @@ using UnityEngine;
 public class Patrolling : MonoBehaviour
 {
     public Transform[] points; //patrol points
+    // TODO: remove dummy_player and assign to player
     public Transform player; // Reference to the player
 
     private int current;
@@ -13,10 +14,17 @@ public class Patrolling : MonoBehaviour
     private LayerMask detectionLayer; // Layer for raycast detection (e.g., Player layer)
     private bool isChasing = false;
     private bool returningToPatrol = false;
+    private GameObject projectile_template;
     // Start is called before the first frame update
     void Start()
     {
+        // projectile_template = (GameObject)Resources.Load("Rock", typeof(GameObject));  // projectile prefab
+        // Debug.Log(projectile_template);
+        // if (projectile_template == null)
+        //     Debug.LogError("Error: could not find the rock prefab in the project! Did you delete/move the prefab from your project?");
+
         current = 0;
+        StartCoroutine("Spawn");
     }
 
     // Update is called once per frame
@@ -101,7 +109,7 @@ public class Patrolling : MonoBehaviour
         // Perform a raycast to check if the player is in sight
         if (Physics.Raycast(transform.position, directionToPlayer, out RaycastHit hit, detectionRadius))
         {
-            Debug.Log("raycast hit");
+            // Debug.Log("raycast hit");
             // Check if the raycast hit the player
             return hit.transform == player;
         }
@@ -125,5 +133,40 @@ public class Patrolling : MonoBehaviour
         }
 
         return closestPointIndex;
+    }
+
+    private IEnumerator Spawn()
+    {
+        while (true)
+        {
+            if (isChasing)
+            {
+                Debug.Log("Spawning sphere...");
+                Vector3 directionToPlayer = (player.position - transform.position).normalized;
+
+                // Create a sphere primitive
+                GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+
+                // Set its position and scale
+                sphere.transform.position = transform.position + 1.1f * directionToPlayer;
+                sphere.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f); // Adjust scale if needed
+
+                // Add necessary components
+                Rigidbody rb = sphere.AddComponent<Rigidbody>();
+                rb.useGravity = false; // Prevent gravity if it's unnecessary
+
+                SphereCollider collider = sphere.GetComponent<SphereCollider>();
+                collider.isTrigger = true; // Set as trigger for interaction with player
+
+                // Add the Rock script dynamically
+                Rock rock = sphere.AddComponent<Rock>();
+                rock.direction = directionToPlayer; // Assign normalized direction
+                rock.velocity = 3.0f;               // Set velocity
+                rock.birth_time = Time.time;        // Record spawn time
+
+                Debug.Log("Sphere instantiated successfully.");
+            }
+            yield return new WaitForSeconds(2.5f); // next shot will be shot after this delay
+        }
     }
 }
