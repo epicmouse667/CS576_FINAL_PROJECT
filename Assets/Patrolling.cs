@@ -144,22 +144,28 @@ public class Patrolling : MonoBehaviour
                 Debug.Log("Spawning sphere...");
                 Vector3 directionToPlayer = (player.position - transform.position).normalized;
 
-                // Create a sphere primitive
-                GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                // Generate a random primitive
+                PrimitiveType[] primitiveTypes = { PrimitiveType.Sphere, PrimitiveType.Cube, PrimitiveType.Cylinder, PrimitiveType.Capsule };
+                int rand = Random.Range(0, primitiveTypes.Length);
+                GameObject primitive = GameObject.CreatePrimitive(primitiveTypes[rand]);
 
                 // Set its position and scale
-                sphere.transform.position = transform.position + 1.1f * directionToPlayer;
-                sphere.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f); // Adjust scale if needed
+                primitive.transform.position = transform.position + 1.1f * directionToPlayer;
+                primitive.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f); // Adjust scale if needed
 
                 // Add necessary components
-                Rigidbody rb = sphere.AddComponent<Rigidbody>();
+                Rigidbody rb = primitive.AddComponent<Rigidbody>();
                 rb.useGravity = false; // Prevent gravity if it's unnecessary
 
-                SphereCollider collider = sphere.GetComponent<SphereCollider>();
+                Collider collider = primitive.GetComponent<Collider>();
                 collider.isTrigger = true; // Set as trigger for interaction with player
 
+                // Set the material color to red
+                Renderer renderer = primitive.GetComponent<Renderer>();
+                renderer.material.color = Color.red;
+
                 // Add the Rock script dynamically
-                Rock rock = sphere.AddComponent<Rock>();
+                Rock rock = primitive.AddComponent<Rock>();
                 rock.direction = directionToPlayer; // Assign normalized direction
                 rock.velocity = 3.0f;               // Set velocity
                 rock.birth_time = Time.time;        // Record spawn time
