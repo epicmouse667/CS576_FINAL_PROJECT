@@ -9,8 +9,8 @@ public class Patrolling : MonoBehaviour
     public Transform player; // Reference to the player
 
     private int current;
-    private float speed = 2.0f;
-    private float detectionRadius = 10.0f; // Radius to detect the player
+    private float speed = 7.0f;
+    private float detectionRadius = 100.0f; // Radius to detect the player
     private LayerMask detectionLayer; // Layer for raycast detection (e.g., Player layer)
     private bool isChasing = false;
     private bool returningToPatrol = false;
@@ -150,8 +150,11 @@ public class Patrolling : MonoBehaviour
                 GameObject primitive = GameObject.CreatePrimitive(primitiveTypes[rand]);
 
                 // Set its position and scale
-                primitive.transform.position = transform.position + 1.1f * directionToPlayer;
-                primitive.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f); // Adjust scale if needed
+                Vector3 startPos = transform.position + 1.1f * directionToPlayer;
+                startPos.y = 15.0f;
+                primitive.transform.position = startPos;
+                // primitive.transform.position.y = 10.0f;
+                primitive.transform.localScale = new Vector3(2.5f, 2.5f, 2.5f); // Adjust scale if needed
 
                 // Add necessary components
                 Rigidbody rb = primitive.AddComponent<Rigidbody>();
@@ -167,7 +170,7 @@ public class Patrolling : MonoBehaviour
                 // Add the Rock script dynamically
                 Rock rock = primitive.AddComponent<Rock>();
                 rock.direction = directionToPlayer; // Assign normalized direction
-                rock.velocity = 3.0f;               // Set velocity
+                rock.velocity = 12.0f;               // Set velocity
                 rock.birth_time = Time.time;        // Record spawn time
 
                 Debug.Log("Sphere instantiated successfully.");
