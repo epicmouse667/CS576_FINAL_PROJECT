@@ -27,7 +27,7 @@ public class Rock : MonoBehaviour
     {
         // Debug.Log("Collision!! - " + other.gameObject.name);
         // TODO: update to real player
-        if (other.gameObject.name == "Claire")
+        if (other.CompareTag("Player"))
         {
             // reduce player life
             Debug.Log("Player hit");
