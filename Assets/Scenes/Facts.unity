@@ -152,7 +152,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fact: {fileID: 336465534}
-  geometryFacts: []
 --- !u!4 &223674615
 Transform:
   m_ObjectHideFlags: 0
