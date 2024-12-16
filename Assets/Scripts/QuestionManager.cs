@@ -88,6 +88,12 @@ public class QuestionManager : MonoBehaviour
         if (isCorrect)
         {
             Debug.Log("Correct Answer!");
+            Vector3 spawnPosition = player.transform.position + player.transform.forward * 10.0f;
+            spawnPosition.y = 4;
+
+            // Instantiate the puzzle prefab at the calculated position
+            Instantiate(puzzlePrefab[puzzleCount % 4], spawnPosition, Quaternion.identity);
+            puzzleCount++;
             currentQuestionIndex++;
             CheckForCompletion();
         }
