@@ -71,46 +71,41 @@ public class CharacterContoller : MonoBehaviour
         }
 
         // Forward movement
-        if (Input.GetKey(KeyCode.UpArrow) && !Input.GetKey(KeyCode.LeftShift))
+        bool isShiftpressed = Input.GetKey(KeyCode.LeftShift);
+        if (isShiftpressed && Input.GetKey(KeyCode.UpArrow))
         {
-            velocity = Mathf.Lerp(velocity, walking_velocity, Time.deltaTime * 2);
-            animation_controller.SetBool("isWalking", true);
-            animation_controller.SetBool("isRunning", false);
-            animation_controller.SetBool("isIdle", false);
-            movement_direction = transform.forward;
-        }
-        else if (Input.GetKey(KeyCode.UpArrow) && Input.GetKey(KeyCode.LeftShift))
-        {
+            Debug.Log("Running");
             velocity = Mathf.Lerp(velocity, walking_velocity * 2.0f, Time.deltaTime * 2);
             animation_controller.SetBool("isRunning", true);
             animation_controller.SetBool("isWalking", false);
             animation_controller.SetBool("isIdle", false);
             movement_direction = transform.forward;
         }
-        // Backward movement
-        //
-
-        else if (Input.GetKey(KeyCode.DownArrow))
+        else if (Input.GetKey(KeyCode.UpArrow) && !isShiftpressed)
         {
+            Debug.Log("walk");
 
             velocity = Mathf.Lerp(velocity, walking_velocity, Time.deltaTime * 2);
-
-
             animation_controller.SetBool("isWalking", true);
-
-
             animation_controller.SetBool("isRunning", false);
-
-
             animation_controller.SetBool("isIdle", false);
+            movement_direction = transform.forward;
+        }
+        else if (Input.GetKey(KeyCode.DownArrow))
+        {
+            Debug.Log("back");
 
-
+            velocity = Mathf.Lerp(velocity, walking_velocity, Time.deltaTime * 2);
+            animation_controller.SetBool("isWalking", true);
+            animation_controller.SetBool("isRunning", false);
+            animation_controller.SetBool("isIdle", false);
             movement_direction = -transform.forward;
         }
         else
         {
+            Debug.Log("stop");
             // Idle state
-            velocity = Mathf.Lerp(velocity, 0, Time.deltaTime * 2);
+            velocity = 0;
             animation_controller.SetBool("isIdle", true);
             animation_controller.SetBool("isWalking", false);
             animation_controller.SetBool("isRunning", false);
