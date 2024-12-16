@@ -167,6 +167,9 @@ public class Patrolling : MonoBehaviour
                 Renderer renderer = primitive.GetComponent<Renderer>();
                 renderer.material.color = Color.red;
 
+                // add tag
+                primitive.tag = "Obstacle";
+
                 // Add the Rock script dynamically
                 Rock rock = primitive.AddComponent<Rock>();
                 rock.direction = directionToPlayer; // Assign normalized direction

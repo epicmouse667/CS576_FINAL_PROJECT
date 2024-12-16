@@ -10,11 +10,11 @@ public class CharacterContoller : MonoBehaviour
     public float walking_velocity;
     public float velocity;
     public int num_lives;
-    private float gravity = -9.81f; 
+    private float gravity = -9.81f;
     private float verticalVelocity = 0.0f;
 
-    public bool canMove = true; 
-    private bool isDead = false; 
+    public bool canMove = true;
+    private bool isDead = false;
 
     public LiveManager liveManager; // Reference to LiveManager script
 
@@ -47,79 +47,79 @@ public class CharacterContoller : MonoBehaviour
     }
 
     void HandleMovementAndAnimation()
-{
-    if (!canMove)
-        return;
+    {
+        if (!canMove)
+            return;
 
-    if (character_controller.isGrounded)
-    {
-        verticalVelocity = -1f; 
-    }
-    else
-    {
-        verticalVelocity += gravity * Time.deltaTime; 
-    }
+        if (character_controller.isGrounded)
+        {
+            verticalVelocity = -1f;
+        }
+        else
+        {
+            verticalVelocity += gravity * Time.deltaTime;
+        }
 
-    // Rotation controls
-    if (Input.GetKey(KeyCode.LeftArrow))
-    {
-        transform.Rotate(0, -90 * Time.deltaTime, 0); 
-    }
-    else if (Input.GetKey(KeyCode.RightArrow))
-    {
-        transform.Rotate(0, 90 * Time.deltaTime, 0); 
-    }
+        // Rotation controls
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            transform.Rotate(0, -90 * Time.deltaTime, 0);
+        }
+        else if (Input.GetKey(KeyCode.RightArrow))
+        {
+            transform.Rotate(0, 90 * Time.deltaTime, 0);
+        }
 
-    // Forward movement
-    if (Input.GetKey(KeyCode.UpArrow) && !Input.GetKey(KeyCode.LeftShift))
-    {
-        velocity = Mathf.Lerp(velocity, walking_velocity, Time.deltaTime * 2);
-        animation_controller.SetBool("isWalking", true);
-        animation_controller.SetBool("isRunning", false);
-        animation_controller.SetBool("isIdle", false);
-        movement_direction = transform.forward;
-    }
-    else if (Input.GetKey(KeyCode.UpArrow) && Input.GetKey(KeyCode.LeftShift))
-    {
-        velocity = Mathf.Lerp(velocity, walking_velocity * 2.0f, Time.deltaTime * 2);
-        animation_controller.SetBool("isRunning", true);
-        animation_controller.SetBool("isWalking", false);
-        animation_controller.SetBool("isIdle", false);
-        movement_direction = transform.forward;
-    }
-    // Backward movement
-    //
+        // Forward movement
+        if (Input.GetKey(KeyCode.UpArrow) && !Input.GetKey(KeyCode.LeftShift))
+        {
+            velocity = Mathf.Lerp(velocity, walking_velocity, Time.deltaTime * 2);
+            animation_controller.SetBool("isWalking", true);
+            animation_controller.SetBool("isRunning", false);
+            animation_controller.SetBool("isIdle", false);
+            movement_direction = transform.forward;
+        }
+        else if (Input.GetKey(KeyCode.UpArrow) && Input.GetKey(KeyCode.LeftShift))
+        {
+            velocity = Mathf.Lerp(velocity, walking_velocity * 2.0f, Time.deltaTime * 2);
+            animation_controller.SetBool("isRunning", true);
+            animation_controller.SetBool("isWalking", false);
+            animation_controller.SetBool("isIdle", false);
+            movement_direction = transform.forward;
+        }
+        // Backward movement
+        //
 
-    else if (Input.GetKey(KeyCode.DownArrow))
-    {
+        else if (Input.GetKey(KeyCode.DownArrow))
+        {
 
-        velocity = Mathf.Lerp(velocity, walking_velocity, Time.deltaTime * 2);
+            velocity = Mathf.Lerp(velocity, walking_velocity, Time.deltaTime * 2);
 
-        
-        animation_controller.SetBool("isWalking", true); 
-        
-        
-        animation_controller.SetBool("isRunning", false);
-        
-        
-        animation_controller.SetBool("isIdle", false);
-        
-        
-        movement_direction = -transform.forward; 
+
+            animation_controller.SetBool("isWalking", true);
+
+
+            animation_controller.SetBool("isRunning", false);
+
+
+            animation_controller.SetBool("isIdle", false);
+
+
+            movement_direction = -transform.forward;
+        }
+        else
+        {
+            // Idle state
+            velocity = Mathf.Lerp(velocity, 0, Time.deltaTime * 2);
+            animation_controller.SetBool("isIdle", true);
+            animation_controller.SetBool("isWalking", false);
+            animation_controller.SetBool("isRunning", false);
+            movement_direction = Vector3.zero;
+        }
+
+        movement_direction.y = verticalVelocity;
+        character_controller.Move(movement_direction * velocity * Time.deltaTime);
     }
-    else
-    {
-        // Idle state
-        velocity = Mathf.Lerp(velocity, 0, Time.deltaTime * 2);
-        animation_controller.SetBool("isIdle", true);
-        animation_controller.SetBool("isWalking", false);
-        animation_controller.SetBool("isRunning", false);
-        movement_direction = Vector3.zero;
-    }
-
-    movement_direction.y = verticalVelocity;
-    character_controller.Move(movement_direction * velocity * Time.deltaTime);
-}
 
     void TriggerDeath()
     {
@@ -135,7 +135,21 @@ public class CharacterContoller : MonoBehaviour
     // **Collision detection**
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (hit.gameObject.CompareTag("Obstacle")) // Detect collision with objects tagged as 'Obstacle'
+        // if (hit.gameObject.CompareTag("Obstacle")) // Detect collision with objects tagged as 'Obstacle'
+        // {
+        //     Debug.Log("Collided with an obstacle!");
+
+        //     if (liveManager != null)
+        //     {
+        //         liveManager.ReduceLives(); // Reduce lives
+        //     }
+        // }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Trigger enter!");
+        if (other.gameObject.CompareTag("Obstacle")) // Detect collision with objects tagged as 'Obstacle'
         {
             Debug.Log("Collided with an obstacle!");
 
