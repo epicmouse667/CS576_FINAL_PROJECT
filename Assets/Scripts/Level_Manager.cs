@@ -22,8 +22,8 @@ public class Level_Manager : MonoBehaviour
     }
 
     //TODO: Update level name
-    private void LoadLevel(int level)
+    public void LoadLevel(int level)
     {
-        SceneManager.LoadScene("Level" + level);
+        SceneManager.LoadScene("level" + level);
     }
 }
