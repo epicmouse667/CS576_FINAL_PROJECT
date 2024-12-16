@@ -89,18 +89,22 @@ public class CharacterContoller : MonoBehaviour
     }
     // Backward movement
     //
-    
+
     else if (Input.GetKey(KeyCode.DownArrow))
     {
 
         velocity = Mathf.Lerp(velocity, walking_velocity, Time.deltaTime * 2);
 
+        
         animation_controller.SetBool("isWalking", true); 
-
+        
+        
         animation_controller.SetBool("isRunning", false);
-
+        
+        
         animation_controller.SetBool("isIdle", false);
-
+        
+        
         movement_direction = -transform.forward; 
     }
     else
