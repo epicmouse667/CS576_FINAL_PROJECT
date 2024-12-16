@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class AnswerZone : MonoBehaviour
 {
-    public bool isCorrect;
+    public bool isCorrect; // Assigned dynamically in QuestionManager
     private QuestionManager questionManager;
 
     void Start()
@@ -10,11 +10,21 @@ public class AnswerZone : MonoBehaviour
         questionManager = FindObjectOfType<QuestionManager>();
     }
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player")) // Ensure the player tag is "Player"
         {
-            questionManager.OnAnswerSelected(isCorrect);
+            if (isCorrect)
+            {
+                questionManager.OnAnswerSelected(true);
+            }
+            else
+            {
+                questionManager.OnAnswerSelected(false);
+            }
         }
     }
 }
+
+
+
