@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Patrolling : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class Patrolling : MonoBehaviour
     private bool isChasing = false;
     private bool returningToPatrol = false;
     private GameObject projectile_template;
+    private int levelNumber;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +24,8 @@ public class Patrolling : MonoBehaviour
         // Debug.Log(projectile_template);
         // if (projectile_template == null)
         //     Debug.LogError("Error: could not find the rock prefab in the project! Did you delete/move the prefab from your project?");
-
+        Scene currentScene = SceneManager.GetActiveScene();
+        levelNumber = currentScene.name == "level2" ? 2 : 1;
         current = 0;
         StartCoroutine("Spawn");
     }
@@ -151,10 +154,10 @@ public class Patrolling : MonoBehaviour
 
                 // Set its position and scale
                 Vector3 startPos = transform.position + 1.1f * directionToPlayer;
-                startPos.y = 4.0f;
+                startPos.y = levelNumber == 1 ? 1.0f : 4.0f;
                 primitive.transform.position = startPos;
                 // primitive.transform.position.y = 10.0f;
-                primitive.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f); // Adjust scale if needed
+                primitive.transform.localScale = levelNumber == 1 ? new Vector3(0.2f, 0.2f, 0.2f) : new Vector3(0.5f, 0.5f, 0.5f); // Adjust scale if needed
 
                 // Add necessary components
                 Rigidbody rb = primitive.AddComponent<Rigidbody>();
@@ -173,7 +176,7 @@ public class Patrolling : MonoBehaviour
                 // Add the Rock script dynamically
                 Rock rock = primitive.AddComponent<Rock>();
                 rock.direction = directionToPlayer; // Assign normalized direction
-                rock.velocity = 12.0f;               // Set velocity
+                rock.velocity = 5.0f;               // Set velocity
                 rock.birth_time = Time.time;        // Record spawn time
 
                 Debug.Log("Sphere instantiated successfully.");
