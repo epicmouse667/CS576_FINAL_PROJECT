@@ -47,56 +47,68 @@ public class CharacterContoller : MonoBehaviour
     }
 
     void HandleMovementAndAnimation()
+{
+    if (!canMove)
+        return;
+
+    if (character_controller.isGrounded)
     {
-        if (!canMove)
-            return;
-
-        if (character_controller.isGrounded)
-        {
-            verticalVelocity = -1f; 
-        }
-        else
-        {
-            verticalVelocity += gravity * Time.deltaTime; 
-        }
-
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            transform.Rotate(0, -90 * Time.deltaTime, 0); 
-        }
-        else if (Input.GetKey(KeyCode.RightArrow))
-        {
-            transform.Rotate(0, 90 * Time.deltaTime, 0); 
-        }
-
-        if (Input.GetKey(KeyCode.UpArrow) && !Input.GetKey(KeyCode.LeftShift))
-        {
-            velocity = Mathf.Lerp(velocity, walking_velocity, Time.deltaTime * 2);
-            animation_controller.SetBool("isWalking", true);
-            animation_controller.SetBool("isRunning", false);
-            animation_controller.SetBool("isIdle", false);
-            movement_direction = transform.forward;
-        }
-        else if (Input.GetKey(KeyCode.UpArrow) && Input.GetKey(KeyCode.LeftShift))
-        {
-            velocity = Mathf.Lerp(velocity, walking_velocity * 2.0f, Time.deltaTime * 2);
-            animation_controller.SetBool("isRunning", true);
-            animation_controller.SetBool("isWalking", false);
-            animation_controller.SetBool("isIdle", false);
-            movement_direction = transform.forward;
-        }
-        else
-        {
-            velocity = Mathf.Lerp(velocity, 0, Time.deltaTime * 2);
-            animation_controller.SetBool("isIdle", true);
-            animation_controller.SetBool("isWalking", false);
-            animation_controller.SetBool("isRunning", false);
-            movement_direction = Vector3.zero;
-        }
-
-        movement_direction.y = verticalVelocity;
-        character_controller.Move(movement_direction * velocity * Time.deltaTime);
+        verticalVelocity = -1f; 
     }
+    else
+    {
+        verticalVelocity += gravity * Time.deltaTime; 
+    }
+
+    // Rotation controls
+    if (Input.GetKey(KeyCode.LeftArrow))
+    {
+        transform.Rotate(0, -90 * Time.deltaTime, 0); 
+    }
+    else if (Input.GetKey(KeyCode.RightArrow))
+    {
+        transform.Rotate(0, 90 * Time.deltaTime, 0); 
+    }
+
+    // Forward movement
+    if (Input.GetKey(KeyCode.UpArrow) && !Input.GetKey(KeyCode.LeftShift))
+    {
+        velocity = Mathf.Lerp(velocity, walking_velocity, Time.deltaTime * 2);
+        animation_controller.SetBool("isWalking", true);
+        animation_controller.SetBool("isRunning", false);
+        animation_controller.SetBool("isIdle", false);
+        movement_direction = transform.forward;
+    }
+    else if (Input.GetKey(KeyCode.UpArrow) && Input.GetKey(KeyCode.LeftShift))
+    {
+        velocity = Mathf.Lerp(velocity, walking_velocity * 2.0f, Time.deltaTime * 2);
+        animation_controller.SetBool("isRunning", true);
+        animation_controller.SetBool("isWalking", false);
+        animation_controller.SetBool("isIdle", false);
+        movement_direction = transform.forward;
+    }
+    // Backward movement
+    else if (Input.GetKey(KeyCode.DownArrow))
+    {
+        velocity = Mathf.Lerp(velocity, walking_velocity, Time.deltaTime * 2);
+        animation_controller.SetBool("isWalking", true); // Reuse walking animation
+        animation_controller.SetBool("isRunning", false);
+        animation_controller.SetBool("isIdle", false);
+        movement_direction = -transform.forward; // Move backwards
+    }
+    else
+    {
+        // Idle state
+        velocity = Mathf.Lerp(velocity, 0, Time.deltaTime * 2);
+        animation_controller.SetBool("isIdle", true);
+        animation_controller.SetBool("isWalking", false);
+        animation_controller.SetBool("isRunning", false);
+        movement_direction = Vector3.zero;
+    }
+
+    movement_direction.y = verticalVelocity;
+    character_controller.Move(movement_direction * velocity * Time.deltaTime);
+}
 
     void TriggerDeath()
     {
