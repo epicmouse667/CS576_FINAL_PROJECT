@@ -27,6 +27,18 @@ public class QuestionManager : MonoBehaviour
         LoadNextQuestion();
     }
 
+    public GameObject GetChildWithTag(GameObject parent, string tag)
+    {
+        foreach (Transform child in parent.transform)
+        {
+            if (child.CompareTag(tag))
+            {
+                return child.gameObject;
+            }
+        }
+        return null;
+    }
+
     public void LoadNextQuestion()
     {
         if (currentQuestionIndex < currentQuestions.Count)
@@ -38,15 +50,22 @@ public class QuestionManager : MonoBehaviour
             {
                 if (i < question.options.Count)
                 {
-                    answerZones[i].GetComponent<TMP_Text>().text = question.options[i]; // Updated
-                    answerZones[i].SetActive(true);
+                    // TextMeshProUGUI textComponents = answerZones[i].GetComponentInChildren<TextMeshProUGUI>();
+
+                    // Debug.Log(textComponents);
+                    // answerZones[i].GetChildrenByTag("AZ").GetComponent<TMP_Text>().text = question.options[i]; // Updated
+                    // answerZones[i].SetActive(true);
+                    GameObject child = GetChildWithTag(answerZones[i], "AZ");
+
+                    if (child != null)
+                        child.GetComponent<TMP_Text>().text = question.options[i];
 
                     // Assign whether this option is correct
                     answerZones[i].GetComponent<AnswerZone>().isCorrect = (question.options[i] == question.answer);
                 }
                 else
                 {
-                    answerZones[i].SetActive(false); // Hide unused zones
+                    // answerZones[i].SetActive(false); // Hide unused zones
                 }
             }
         }

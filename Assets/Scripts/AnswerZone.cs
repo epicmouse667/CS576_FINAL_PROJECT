@@ -12,8 +12,10 @@ public class AnswerZone : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Destroy!!");
         if (other.CompareTag("Player"))
         {
+            Debug.Log("Destroy!!");
             questionManager.OnAnswerSelected(isCorrect);
         }
     }
