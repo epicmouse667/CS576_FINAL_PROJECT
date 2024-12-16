@@ -18,8 +18,12 @@ public class FactsManager : MonoBehaviour
     public TMP_Text fact;
     private GeometryFacts geometryFacts;
     // Start is called before the first frame update
+     public AudioSource audioSource;             // AudioSource component
+    public AudioClip backgroundMusic;           // Background music clip
+    
     void Start()
     {
+        PlayBackgroundMusic();
         LoadFacts();
         DisplayRandomFact();
     }
@@ -70,4 +74,20 @@ public class FactsManager : MonoBehaviour
             Debug.LogWarning("No facts available to display.");
         }
     }
+
+    void PlayBackgroundMusic()
+    {
+        if (audioSource != null && backgroundMusic != null)
+        {
+            audioSource.loop = true; // Loop the background music
+            audioSource.clip = backgroundMusic;
+            audioSource.Play();
+        }
+        else
+        {
+            Debug.LogWarning("AudioSource or Background Music clip is missing.");
+        }
+    }
+
+    
 }
