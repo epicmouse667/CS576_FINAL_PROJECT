@@ -6,3 +6,8 @@ An interactive geometry puzzle adventure where players solve multiple-choice geo
 - level design for level 2
 - animation for puzzles
 - puzzles related scripts including puzzle picker, puzzle rotation control and puzzle generation.
+
+  ## Vishakha Mistry
+  - AI NPCs
+  - Menu: Main, Levels
+  - Facts display
