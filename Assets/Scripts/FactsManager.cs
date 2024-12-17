@@ -2,21 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 [System.Serializable]
-public class GeometryFacts
+public class Fact
 {
-    public List<string> facts;
+    public string fact;
 }
-
-// TODO: update facts.json with actual facts
 
 public class FactsManager : MonoBehaviour
 {
-    public TMP_Text fact;
-    private GeometryFacts geometryFacts;
+    public TMP_Text factText;
+    private List<Fact> facts = new List<Fact>();
+
     // Start is called before the first frame update
      public AudioSource audioSource;             // AudioSource component
     public AudioClip backgroundMusic;           // Background music clip
@@ -28,46 +26,52 @@ public class FactsManager : MonoBehaviour
         DisplayRandomFact();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     void LoadFacts()
     {
-        // Define the path to the JSON file
-        string filePath = Path.Combine(Application.dataPath, "json_data/facts.json");
+        // Define the path to the JSONL file
+        string filePath = Path.Combine(Application.dataPath, "json_data/facts.jsonl");
 
         if (File.Exists(filePath))
         {
-            // Read the JSON file
-            string jsonContent = File.ReadAllText(filePath);
+            // Read the JSONL file line by line
+            string[] lines = File.ReadAllLines(filePath);
 
-            // Parse the JSON content
-            geometryFacts = JsonUtility.FromJson<GeometryFacts>(jsonContent);
+            foreach (string line in lines)
+            {
+                if (!string.IsNullOrWhiteSpace(line))
+                {
+                    // Parse each line into a Fact object
+                    try
+                    {
+                        Fact fact = JsonUtility.FromJson<Fact>(line);
+                        facts.Add(fact);
+                    }
+                    catch (System.Exception e)
+                    {
+                        Debug.LogError($"Error parsing line: {line}. Exception: {e.Message}");
+                    }
+                }
+            }
+
             Debug.Log("Facts loaded successfully.");
         }
         else
         {
-            Debug.LogError($"Error: Could not find the JSON file at {filePath}!");
+            Debug.LogError($"Error: Could not find the JSONL file at {filePath}!");
         }
     }
 
     void DisplayRandomFact()
     {
-        if (geometryFacts != null && geometryFacts.facts.Count > 0)
+        if (facts.Count > 0)
         {
-            // Pick a random fact
-            int randomIndex = Random.Range(0, geometryFacts.facts.Count);
-            string randomFact = geometryFacts.facts[randomIndex];
+            // Pick a random fact from the list
+            int randomIndex = Random.Range(0, facts.Count);
+            string randomFact = facts[randomIndex].fact;
 
-            // Display the fact in the console or in the game UI
+            // Display the fact in the TextMeshPro text component
             Debug.Log($"Random Geometry Fact: {randomFact}");
-            fact.text = randomFact;
-
-            // Optionally, display it in a UI element (e.g., TextMeshPro or Unity UI Text)
-            // myTextUI.text = randomFact;
+            factText.text = randomFact;
         }
         else
         {
