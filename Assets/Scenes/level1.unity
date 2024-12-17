@@ -10932,6 +10932,8 @@ MonoBehaviour:
   num_lives: 5
   canMove: 1
   liveManager: {fileID: 978979774}
+  audioSource: {fileID: 1042315732}
+  gameOverSound: {fileID: 8300000, guid: 6ca7df02f0fdac54788fdb3f2874f6e9, type: 3}
 --- !u!1001 &923608383
 PrefabInstance:
   m_ObjectHideFlags: 0

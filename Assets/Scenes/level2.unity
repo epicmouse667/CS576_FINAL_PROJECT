@@ -5598,12 +5598,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questionLoader: {fileID: 1874057654}
   difficulty: easy
-  questionTextUI: {fileID: 576381665}
+  questionObjects: []
   answerZones:
   - {fileID: 1124707710}
   - {fileID: 102062373}
   - {fileID: 492997049}
   - {fileID: 169295101}
+  puzzlePrefab: []
+  player: {fileID: 0}
+  playerLives: 3
 --- !u!114 &719342299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12267,6 +12270,8 @@ MonoBehaviour:
   num_lives: 5
   canMove: 1
   liveManager: {fileID: 434553250}
+  audioSource: {fileID: 1787888778}
+  gameOverSound: {fileID: 8300000, guid: 6ca7df02f0fdac54788fdb3f2874f6e9, type: 3}
 --- !u!4 &1642157350 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8131462640605833815, guid: 798c05ee1e2530b4ebb1d9d7e5a2c6a9, type: 3}

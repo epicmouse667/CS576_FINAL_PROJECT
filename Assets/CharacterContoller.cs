@@ -17,6 +17,8 @@ public class CharacterContoller : MonoBehaviour
     private bool isDead = false;
 
     public LiveManager liveManager; // Reference to LiveManager script
+    public AudioSource audioSource; // Audio source component
+    public AudioClip gameOverSound;
 
     void Start()
     {
@@ -32,6 +34,12 @@ public class CharacterContoller : MonoBehaviour
         if (liveManager == null)
         {
             Debug.LogError("LiveManager not found in the scene!");
+        }
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            Debug.LogError("AudioSource missing. Adding one to the GameObject.");
+            audioSource = gameObject.AddComponent<AudioSource>();
         }
     }
 
@@ -125,6 +133,16 @@ public class CharacterContoller : MonoBehaviour
         canMove = false;
         velocity = 0.0f;
         animation_controller.SetBool("isDead", true);
+         // Play game over sound if available
+        if (audioSource != null && gameOverSound != null)
+        {
+            audioSource.PlayOneShot(gameOverSound);
+            Debug.Log("Game Over sound played.");
+        }
+        else
+        {
+            Debug.LogWarning("AudioSource or GameOverSound not assigned!");
+        }
     }
 
     // **Collision detection**
