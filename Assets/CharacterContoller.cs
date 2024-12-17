@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CharacterContoller : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class CharacterContoller : MonoBehaviour
     public LiveManager liveManager; // Reference to LiveManager script
     public AudioSource audioSource; // Audio source component
     public AudioClip gameOverSound;
+    public int puzzleCollected = 0;
 
     void Start()
     {
@@ -49,6 +51,10 @@ public class CharacterContoller : MonoBehaviour
         {
             TriggerDeath();
             return;
+        }
+        if (puzzleCollected == 4)
+        {
+            SceneManager.LoadScene("Facts");
         }
 
         HandleMovementAndAnimation();

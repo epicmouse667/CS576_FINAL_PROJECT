@@ -13,7 +13,13 @@ public class PuzzlePickup : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // Increment puzzle count in the GameManager
-            // gameManager.IncrementPuzzleCount();
+            CharacterContoller player = other.GetComponent<CharacterContoller>();
+
+            if (player != null)
+            {
+                // Increment the puzzle count in the Player script
+                player.puzzleCollected++;
+            }
 
             // Destroy the puzzle object to simulate picking it up
             Destroy(gameObject);
