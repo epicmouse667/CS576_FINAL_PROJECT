@@ -19,6 +19,7 @@ public class QuestionManager : MonoBehaviour
 
     [Header("Game Settings")]
     public int playerLives = 3;                // Number of lives for the player
+    public LiveManager liveManager;
 
     void Start()
     {
@@ -32,9 +33,17 @@ public class QuestionManager : MonoBehaviour
         }
 
         // Get the first 6 questions and shuffle them
-        gameQuestions = allQuestions.GetRange(0, Mathf.Min(6, allQuestions.Count));
+        gameQuestions = allQuestions;
         ShuffleQuestions();
+
+        gameQuestions = gameQuestions.GetRange(0, Mathf.Min(6, allQuestions.Count));
         LoadQuestionsAndAnswers();
+        liveManager = FindObjectOfType<LiveManager>();
+
+        if (liveManager == null)
+        {
+            Debug.LogError("LiveManager not found in the scene!");
+        }
     }
 
     void LoadQuestionsAndAnswers()
@@ -89,14 +98,14 @@ public class QuestionManager : MonoBehaviour
 
     public void OnAnswerSelected(bool isCorrect)
     {
-        if (isCorrect)
+        if (isCorrect && puzzleCount < 4)
         {
             Debug.Log("Correct Answer!");
-            Vector3 spawnPosition = player.transform.position + player.transform.forward * 10.0f;
+            Vector3 spawnPosition = player.transform.position + player.transform.forward * 3.0f;
             spawnPosition.y = 1;
 
             // Instantiate the puzzle prefab at the calculated position
-            Instantiate(puzzlePrefab[puzzleCount % 4], spawnPosition, Quaternion.identity);
+            Instantiate(puzzlePrefab[puzzleCount], spawnPosition, Quaternion.identity);
             puzzleCount++;
             currentQuestionIndex++;
             CheckForCompletion();
@@ -104,13 +113,8 @@ public class QuestionManager : MonoBehaviour
         else
         {
             Debug.Log("Wrong Answer! Lose a life.");
-            playerLives--;
+            liveManager.ReduceLives();
 
-            if (playerLives <= 0)
-            {
-                Debug.Log("Game Over! Player has no lives left.");
-                // TODO: Add Game Over Logic Here
-            }
         }
     }
 
