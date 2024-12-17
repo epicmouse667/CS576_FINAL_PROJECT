@@ -21,6 +21,8 @@ public class CharacterContoller : MonoBehaviour
     public AudioSource audioSource; // Audio source component
     public AudioClip gameOverSound;
     public int puzzleCollected = 0;
+    public AudioSource backgroundAudioSource; // AudioSource for background sound
+    public AudioClip background; // Background audio clip
 
     void Start()
     {
@@ -37,11 +39,56 @@ public class CharacterContoller : MonoBehaviour
         {
             Debug.LogError("LiveManager not found in the scene!");
         }
+        /*
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
         {
             Debug.LogError("AudioSource missing. Adding one to the GameObject.");
             audioSource = gameObject.AddComponent<AudioSource>();
+        }
+        backgroundAudioSource = gameObject.AddComponent<AudioSource>();
+
+        if (backgroundAudioSource != null && background != null)
+        {
+            backgroundAudioSource.clip = background;
+            backgroundAudioSource.loop = true; // Loop the background sound
+            backgroundAudioSource.playOnAwake = true; // Play immediately
+            backgroundAudioSource.Play(); // Start playing the background sound
+            Debug.Log("Background sound started.");
+        }
+        else
+        {
+            Debug.LogWarning("Background AudioSource or background clip not assigned!");
+        }
+        */
+        // Check for existing AudioSource for game over sound
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            Debug.Log("No AudioSource found. Adding a new AudioSource for GameOverSound.");
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+
+        // Check for existing AudioSource for background sound
+        backgroundAudioSource = GetComponent<AudioSource>();
+        if (backgroundAudioSource == null)
+        {
+            Debug.Log("No AudioSource found for background sound. Adding one.");
+            backgroundAudioSource = gameObject.AddComponent<AudioSource>();
+        }
+
+        // Assign and play background sound
+        if (backgroundAudioSource != null && background != null)
+        {
+            backgroundAudioSource.clip = background;
+            backgroundAudioSource.loop = true; // Loop the background sound
+            backgroundAudioSource.playOnAwake = true; // Play immediately
+            backgroundAudioSource.Play(); // Start playing the background sound
+            Debug.Log("Background sound started.");
+        }
+        else
+        {
+            Debug.LogWarning("Background AudioSource or background clip not assigned!");
         }
     }
 

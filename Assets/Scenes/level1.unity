@@ -7882,6 +7882,7 @@ MonoBehaviour:
   - {fileID: 653191910974911962, guid: 1ed6cf9df5e8baf4cb4a1ad90a33468e, type: 3}
   player: {fileID: 920496246}
   playerLives: 3
+  liveManager: {fileID: 0}
 --- !u!4 &583001948
 Transform:
   m_ObjectHideFlags: 0
@@ -10935,6 +10936,8 @@ MonoBehaviour:
   audioSource: {fileID: 1042315732}
   gameOverSound: {fileID: 8300000, guid: 6ca7df02f0fdac54788fdb3f2874f6e9, type: 3}
   puzzleCollected: 0
+  backgroundAudioSource: {fileID: 1042315732}
+  background: {fileID: 8300000, guid: dbbdbba889aa18b4495bfcf3ed721d3a, type: 3}
 --- !u!1001 &923608383
 PrefabInstance:
   m_ObjectHideFlags: 0

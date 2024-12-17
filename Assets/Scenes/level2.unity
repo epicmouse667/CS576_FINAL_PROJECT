@@ -3927,6 +3927,7 @@ MonoBehaviour:
   - {fileID: 653191910974911962, guid: 1ed6cf9df5e8baf4cb4a1ad90a33468e, type: 3}
   player: {fileID: 1642157346}
   playerLives: 3
+  liveManager: {fileID: 0}
 --- !u!4 &360717121
 Transform:
   m_ObjectHideFlags: 0
@@ -4791,7 +4792,7 @@ MonoBehaviour:
   playAgain: {fileID: 690113990}
   levels: {fileID: 247414027}
   audioSource: {fileID: 1787888778}
-  loseLifeSound: {fileID: 8300000, guid: 88f1718c7b5aab144a4d3cbeb5324e4f, type: 3}
+  loseLifeSound: {fileID: 8300000, guid: 6ca7df02f0fdac54788fdb3f2874f6e9, type: 3}
 --- !u!4 &434553251
 Transform:
   m_ObjectHideFlags: 0
@@ -17024,9 +17025,11 @@ MonoBehaviour:
   num_lives: 5
   canMove: 1
   liveManager: {fileID: 434553250}
-  puzzleCollected: 0
   audioSource: {fileID: 1787888778}
   gameOverSound: {fileID: 8300000, guid: 6ca7df02f0fdac54788fdb3f2874f6e9, type: 3}
+  puzzleCollected: 0
+  backgroundAudioSource: {fileID: 1787888778}
+  background: {fileID: 8300000, guid: dbbdbba889aa18b4495bfcf3ed721d3a, type: 3}
 --- !u!4 &1642157350 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8131462640605833815, guid: 798c05ee1e2530b4ebb1d9d7e5a2c6a9, type: 3}
