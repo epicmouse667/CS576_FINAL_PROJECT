@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class QuestionManager : MonoBehaviour
 {
+    private int puzzleCount = 0;
     public QuestionLoader questionLoader;      // Reference to the QuestionLoader
     public string difficulty = "easy";         // Difficulty level to load questions
     private List<Question> gameQuestions;      // Holds the first 6 questions
@@ -12,6 +13,9 @@ public class QuestionManager : MonoBehaviour
     [Header("Scene Game Objects")]
     public Transform[] questionObjects;        // 6 GameObjects for floating questions
     public GameObject[] answerZones;           // 6x4 = 24 AnswerZone GameObjects
+    public GameObject[] puzzlePrefab;           // 6x4 = 24 AnswerZone GameObjects
+
+    public GameObject player;
 
     [Header("Game Settings")]
     public int playerLives = 3;                // Number of lives for the player
@@ -89,7 +93,7 @@ public class QuestionManager : MonoBehaviour
         {
             Debug.Log("Correct Answer!");
             Vector3 spawnPosition = player.transform.position + player.transform.forward * 10.0f;
-            spawnPosition.y = 4;
+            spawnPosition.y = 1;
 
             // Instantiate the puzzle prefab at the calculated position
             Instantiate(puzzlePrefab[puzzleCount % 4], spawnPosition, Quaternion.identity);

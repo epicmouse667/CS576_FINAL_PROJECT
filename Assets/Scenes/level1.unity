@@ -7875,6 +7875,12 @@ MonoBehaviour:
   - {fileID: 1228060569}
   - {fileID: 403966745}
   - {fileID: 1727763984}
+  puzzlePrefab:
+  - {fileID: 494232924241070365, guid: e149e618f3026e1458f6901d7baaaf1d, type: 3}
+  - {fileID: 4974088759988750012, guid: be2272bb25fae8f4e832f94f0780a20c, type: 3}
+  - {fileID: 2682963562583021365, guid: 870567c37c3f73f4b821da928b8b600b, type: 3}
+  - {fileID: 653191910974911962, guid: 1ed6cf9df5e8baf4cb4a1ad90a33468e, type: 3}
+  player: {fileID: 920496246}
   playerLives: 3
 --- !u!4 &583001948
 Transform:
@@ -11822,7 +11828,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -5.6550703, y: 0, z: 0, w: 2.632887}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   _SortingLayer: 0
@@ -17104,7 +17110,7 @@ Transform:
   m_GameObject: {fileID: 1571513176}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -10, y: 0, z: -9}
+  m_LocalPosition: {x: -10, y: 1.02, z: -9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
