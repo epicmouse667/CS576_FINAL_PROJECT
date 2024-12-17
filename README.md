@@ -4,6 +4,10 @@ Link to project: https://github.com/epicmouse667/CS576_FINAL_PROJECT
 
 ## Assets used
 - https://assetstore.unity.com/packages/3d/environments/landscapes/low-poly-simple-nature-pack-162153
+- https://assetstore.unity.com/packages/3d/characters/humanoids/sci-fi/free-test-character-asuna-205897
+- https://assetstore.unity.com/packages/3d/environments/free-voxel-christmas-pack-209907
+- https://assetstore.unity.com/packages/3d/characters/robots/armored-robot-soldier-282945
+- https://assetstore.unity.com/packages/3d/characters/creatures/stylized-free-skeleton-298650
 
 ## Zixin Wang
 - QA dataset and fact dataset collection
