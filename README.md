@@ -32,3 +32,18 @@ Link to project: https://github.com/epicmouse667/CS576_FINAL_PROJECT
  - Integrate level manager and the levels
  - Audio files collection
  - Character modifications
+   
+## Kavisha Parikh
+ - Random Questions loading from dataset.
+ - Implemented QuestionLoader.cs completely
+ - Questions display and creation.
+ - Implemented QuestionManager.cs completely. 
+ - Answer zone display and working.
+ - Implemented answer zone.cs completely
+
+## Varshini venkataraman
+ - Created character controller
+ - Implemented CharacterContoller.cs
+ - Added all the audios in the game
+ - Implemented all audio related scripts
+ - Also worked on lives manager code
