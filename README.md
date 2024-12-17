@@ -1,5 +1,6 @@
 # Umass cs576 final project
 An interactive geometry puzzle adventure where players solve multiple-choice geometry questions to collect puzzle pieces and learn geometry
+Link to project: https://github.com/epicmouse667/CS576_FINAL_PROJECT
 
 ## Zixin Wang
 - QA dataset and fact dataset collection
