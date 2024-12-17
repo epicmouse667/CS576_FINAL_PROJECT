@@ -13,6 +13,8 @@ public class LiveManager : MonoBehaviour
     public Button playAgain;
     public Button levels;
     private string sceneName;
+    public AudioSource audioSource;    // AudioSource for playing sounds
+    public AudioClip loseLifeSound; 
 
     void Start()
     {
@@ -48,6 +50,16 @@ public class LiveManager : MonoBehaviour
         {
             asunaLives--;  // Reduce lives
             UpdateLifeText();  // Update UI
+
+            // Play sound when losing a life
+            if (audioSource != null && loseLifeSound != null)
+            {
+                audioSource.PlayOneShot(loseLifeSound);
+            }
+            else
+            {
+                Debug.LogWarning("AudioSource or loseLifeSound is missing!");
+            }
 
             if (asunaLives == 0)
             {

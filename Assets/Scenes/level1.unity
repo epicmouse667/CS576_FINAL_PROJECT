@@ -10932,6 +10932,7 @@ MonoBehaviour:
   num_lives: 5
   canMove: 1
   liveManager: {fileID: 978979774}
+  puzzleCollected: 0
 --- !u!1001 &923608383
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11390,6 +11391,8 @@ MonoBehaviour:
   gameOverUI: {fileID: 1674368901}
   playAgain: {fileID: 199040919}
   levels: {fileID: 291923377}
+  audioSource: {fileID: 0}
+  loseLifeSound: {fileID: 0}
 --- !u!4 &978979775
 Transform:
   m_ObjectHideFlags: 0
