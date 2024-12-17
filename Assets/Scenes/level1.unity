@@ -11393,13 +11393,8 @@ MonoBehaviour:
   gameOverUI: {fileID: 1674368901}
   playAgain: {fileID: 199040919}
   levels: {fileID: 291923377}
-<<<<<<< HEAD
   audioSource: {fileID: 1042315732}
   loseLifeSound: {fileID: 8300000, guid: 6ca7df02f0fdac54788fdb3f2874f6e9, type: 3}
-=======
-  audioSource: {fileID: 0}
-  loseLifeSound: {fileID: 0}
->>>>>>> b70f19569dc80052fa454e03f417402dbae07bc4
 --- !u!4 &978979775
 Transform:
   m_ObjectHideFlags: 0
