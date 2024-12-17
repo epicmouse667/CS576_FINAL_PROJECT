@@ -32,8 +32,10 @@ public class QuestionManager : MonoBehaviour
         }
 
         // Get the first 6 questions and shuffle them
-        gameQuestions = allQuestions.GetRange(0, Mathf.Min(6, allQuestions.Count));
+        gameQuestions = allQuestions;
         ShuffleQuestions();
+
+        gameQuestions = gameQuestions.GetRange(0, Mathf.Min(6, allQuestions.Count));
         LoadQuestionsAndAnswers();
     }
 
