@@ -14,9 +14,9 @@ Link to project: https://github.com/epicmouse667/CS576_FINAL_PROJECT
 
 ## Zixin Wang
 - QA dataset and fact dataset collection
-- level design for level 2
-- animation for puzzles
-- puzzles related scripts including puzzle picker, puzzle rotation control and puzzle generation.
+- Level design for level 2
+- Animation for puzzles
+- Puzzles related scripts including puzzle picker, puzzle rotation control and puzzle generation.
 
 ## Vishakha Mistry
  - AI NPCs
@@ -24,7 +24,8 @@ Link to project: https://github.com/epicmouse667/CS576_FINAL_PROJECT
  - Facts display
 
 ## Vasantha Pallavi Narla
- - terrain
- - level design for level 1
+ - Terrain
+ - Level design for level 1
  - Integrate level manager and the levels
  - Audio files collection
+ - Character modifications
