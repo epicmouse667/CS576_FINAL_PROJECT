@@ -19,9 +19,10 @@ Link to project: https://github.com/epicmouse667/CS576_FINAL_PROJECT
 - Puzzles related scripts including puzzle picker, puzzle rotation control and puzzle generation.
 
 ## Vishakha Mistry
- - AI NPCs
- - Menu: Main, Levels
- - Facts display
+ - AI NPCs and attack
+ - Menu: Main, Levels, Play-again
+ - Collect puzzle and Facts display
+ - Character Lives handling
 
 ## Vasantha Pallavi Narla
  - Terrain
