@@ -11,6 +11,8 @@ Link to project: https://github.com/epicmouse667/CS576_FINAL_PROJECT
 - https://assetstore.unity.com/packages/3d/characters/animals/5-animated-voxel-animals-145754
 - https://assetstore.unity.com/packages/3d/environments/voxel-universe-free-91388
 - https://assetstore.unity.com/packages/tools/particles-effects/time-of-day-weather-system-40374
+- https://assetstore.unity.com/packages/3d/characters/creatures/stylized-free-skeleton-298650
+- https://assetstore.unity.com/publishers/91265
 
 ## Zixin Wang
 - QA dataset and fact dataset collection
