@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class Fact
@@ -16,16 +18,23 @@ public class FactsManager : MonoBehaviour
     private List<Fact> facts = new List<Fact>();
 
     // Start is called before the first frame update
-     public AudioSource audioSource;             // AudioSource component
+    public AudioSource audioSource;             // AudioSource component
     public AudioClip backgroundMusic;           // Background music clip
-    
+    public Button levels;
+
     void Start()
     {
         PlayBackgroundMusic();
         LoadFacts();
         DisplayRandomFact();
+        levels.onClick.AddListener(OnLevelClick);
     }
 
+    void OnLevelClick()
+    {
+        SceneManager.LoadScene("Levels");
+
+    }
     void LoadFacts()
     {
         // Define the path to the JSONL file
@@ -93,5 +102,5 @@ public class FactsManager : MonoBehaviour
         }
     }
 
-    
+
 }

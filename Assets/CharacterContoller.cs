@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CharacterContoller : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class CharacterContoller : MonoBehaviour
     private bool isDead = false;
 
     public LiveManager liveManager; // Reference to LiveManager script
+    public int puzzleCollected = 0;
 
     void Start()
     {
@@ -41,6 +43,10 @@ public class CharacterContoller : MonoBehaviour
         {
             TriggerDeath();
             return;
+        }
+        if (puzzleCollected == 4)
+        {
+            SceneManager.LoadScene("Facts");
         }
 
         HandleMovementAndAnimation();
