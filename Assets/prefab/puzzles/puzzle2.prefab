@@ -11,9 +11,11 @@ GameObject:
   - component: {fileID: 5245144124807939632}
   - component: {fileID: 6558354076413905138}
   - component: {fileID: 8126120362595125572}
+  - component: {fileID: -1983002548595195916}
+  - component: {fileID: -972066530755996004}
   m_Layer: 0
   m_Name: puzzle2
-  m_TagString: Untagged
+  m_TagString: Puzzle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,3 +103,36 @@ MonoBehaviour:
   frequency: 1
   rotationAxis: {x: 0, y: 0, z: 1}
   rotationSpeed: 20
+--- !u!114 &-1983002548595195916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4974088759988750012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06c37dac699f0f44ca0d8bd5e2861dd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &-972066530755996004
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4974088759988750012}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.03, y: 2, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}
