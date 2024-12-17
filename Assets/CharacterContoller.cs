@@ -80,7 +80,6 @@ public class CharacterContoller : MonoBehaviour
         bool isShiftpressed = Input.GetKey(KeyCode.LeftShift);
         if (isShiftpressed && Input.GetKey(KeyCode.UpArrow))
         {
-            Debug.Log("Running");
             velocity = Mathf.Lerp(velocity, walking_velocity * 2.0f, Time.deltaTime * 2);
             animation_controller.SetBool("isRunning", true);
             animation_controller.SetBool("isWalking", false);
@@ -89,7 +88,6 @@ public class CharacterContoller : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.UpArrow) && !isShiftpressed)
         {
-            Debug.Log("walk");
 
             velocity = Mathf.Lerp(velocity, walking_velocity, Time.deltaTime * 2);
             animation_controller.SetBool("isWalking", true);
@@ -99,7 +97,6 @@ public class CharacterContoller : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.DownArrow))
         {
-            Debug.Log("back");
 
             velocity = Mathf.Lerp(velocity, walking_velocity, Time.deltaTime * 2);
             animation_controller.SetBool("isWalking", true);
@@ -109,7 +106,6 @@ public class CharacterContoller : MonoBehaviour
         }
         else
         {
-            Debug.Log("stop");
             // Idle state
             velocity = 0;
             animation_controller.SetBool("isIdle", true);
@@ -149,7 +145,7 @@ public class CharacterContoller : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Trigger enter!");
+        Debug.Log("Trigger enter!" + other.gameObject);
         if (other.gameObject.CompareTag("Obstacle")) // Detect collision with objects tagged as 'Obstacle'
         {
             Debug.Log("Collided with an obstacle!");
