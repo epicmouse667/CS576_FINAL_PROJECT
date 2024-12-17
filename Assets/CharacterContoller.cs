@@ -18,6 +18,8 @@ public class CharacterContoller : MonoBehaviour
     private bool isDead = false;
 
     public LiveManager liveManager; // Reference to LiveManager script
+    public AudioSource audioSource; // Audio source component
+    public AudioClip gameOverSound;
     public int puzzleCollected = 0;
 
     void Start()
@@ -34,6 +36,12 @@ public class CharacterContoller : MonoBehaviour
         if (liveManager == null)
         {
             Debug.LogError("LiveManager not found in the scene!");
+        }
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            Debug.LogError("AudioSource missing. Adding one to the GameObject.");
+            audioSource = gameObject.AddComponent<AudioSource>();
         }
     }
 
@@ -80,7 +88,6 @@ public class CharacterContoller : MonoBehaviour
         bool isShiftpressed = Input.GetKey(KeyCode.LeftShift);
         if (isShiftpressed && Input.GetKey(KeyCode.UpArrow))
         {
-            Debug.Log("Running");
             velocity = Mathf.Lerp(velocity, walking_velocity * 2.0f, Time.deltaTime * 2);
             animation_controller.SetBool("isRunning", true);
             animation_controller.SetBool("isWalking", false);
@@ -89,7 +96,6 @@ public class CharacterContoller : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.UpArrow) && !isShiftpressed)
         {
-            Debug.Log("walk");
 
             velocity = Mathf.Lerp(velocity, walking_velocity, Time.deltaTime * 2);
             animation_controller.SetBool("isWalking", true);
@@ -99,7 +105,6 @@ public class CharacterContoller : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.DownArrow))
         {
-            Debug.Log("back");
 
             velocity = Mathf.Lerp(velocity, walking_velocity, Time.deltaTime * 2);
             animation_controller.SetBool("isWalking", true);
@@ -109,7 +114,6 @@ public class CharacterContoller : MonoBehaviour
         }
         else
         {
-            Debug.Log("stop");
             // Idle state
             velocity = 0;
             animation_controller.SetBool("isIdle", true);
@@ -131,6 +135,16 @@ public class CharacterContoller : MonoBehaviour
         canMove = false;
         velocity = 0.0f;
         animation_controller.SetBool("isDead", true);
+         // Play game over sound if available
+        if (audioSource != null && gameOverSound != null)
+        {
+            audioSource.PlayOneShot(gameOverSound);
+            Debug.Log("Game Over sound played.");
+        }
+        else
+        {
+            Debug.LogWarning("AudioSource or GameOverSound not assigned!");
+        }
     }
 
     // **Collision detection**
@@ -149,7 +163,7 @@ public class CharacterContoller : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Trigger enter!");
+        Debug.Log("Trigger enter!" + other.gameObject);
         if (other.gameObject.CompareTag("Obstacle")) // Detect collision with objects tagged as 'Obstacle'
         {
             Debug.Log("Collided with an obstacle!");

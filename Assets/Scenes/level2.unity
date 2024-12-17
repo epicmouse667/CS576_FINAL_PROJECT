@@ -17025,6 +17025,8 @@ MonoBehaviour:
   canMove: 1
   liveManager: {fileID: 434553250}
   puzzleCollected: 0
+  audioSource: {fileID: 1787888778}
+  gameOverSound: {fileID: 8300000, guid: 6ca7df02f0fdac54788fdb3f2874f6e9, type: 3}
 --- !u!4 &1642157350 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8131462640605833815, guid: 798c05ee1e2530b4ebb1d9d7e5a2c6a9, type: 3}

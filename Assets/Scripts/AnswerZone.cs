@@ -22,6 +22,7 @@ public class AnswerZone : MonoBehaviour
             {
                 questionManager.OnAnswerSelected(false);
             }
+            Destroy(transform.gameObject);
         }
     }
 }
