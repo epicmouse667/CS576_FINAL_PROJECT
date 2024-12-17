@@ -8,6 +8,8 @@ public class LivesManager : MonoBehaviour
     public int claireLives = 5;   
     public Text lifeText;          // Reference to the UI Text element for lives
     public GameObject gameOverUI;  // Reference to the Game Over UI panel
+public AudioSource audioSource;    // AudioSource for playing sounds
+    public AudioClip loseLifeSound; 
 
     void Start()
     {
@@ -26,6 +28,17 @@ public class LivesManager : MonoBehaviour
     {
         claireLives--;  // Reduce lives
         UpdateLifeText();  // Update UI
+
+        // Play sound when losing a life
+            if (audioSource != null && loseLifeSound != null)
+            {
+                audioSource.PlayOneShot(loseLifeSound);
+            }
+            else
+            {
+                Debug.LogWarning("AudioSource or loseLifeSound is missing!");
+            }
+
 
         if (claireLives <= 0)
         {
